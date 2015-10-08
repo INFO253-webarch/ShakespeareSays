@@ -19,5 +19,5 @@ $("#url_shortener").submit(function(){
 
 	$("#short_url").html(short_url);
 
-	return false;
+	return true;
 });
