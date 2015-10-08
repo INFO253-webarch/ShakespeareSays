@@ -9,12 +9,14 @@ import os
 import sys
 import json
 import hashlib
+import random
+import string
 
 app = flask.Flask(__name__)
 app.debug = True
 
 # Database/Dictionary to save shortened URLs
-db = shelve.open("shorten.db")
+redirect_db = shelve.open("shorten.db")
 
 @app.route('/')
 def index():
@@ -39,15 +41,45 @@ def create():
     This POST request creates an association between a short url and a full url
     and saves it in the database (the dictionary db)
     """
-    raise NotImplementedError     
 
-@app.route("/short/<short>", methods=['GET'])
-def redirect(short):
+    short_url = request.form.get("short_url")
+    long_url = request.form.get("long_url")
+    
+    if not short_url:
+        short_url = ''.join(random.choice(string.ascii_uppercase) 
+                           for _ in range(9))
+
+    redirect_db[short_url] = long_url
+
+
+    return render_template("success.html", 
+                           short_url=short_url, 
+                           long_url=long_url)    
+
+
+@app.route('/test_create/<create_url>', methods=['GET'])
+def test_create(create_url):
+    redirect_db[create_url] = 'http://www.google.com'
+    return('Added short url {} to redirect to google'.format(create_url))
+
+
+@app.route("/short/<short_url>", methods=['GET'])
+def redirect_to_short(short_url):
+    print('short in redirect', short_url)
     """
     Redirect the request to the URL associated =short=, otherwise return 404
     NOT FOUND
     """
-    raise NotImplementedError 
+    if redirect_db.get(short_url):
+        return redirect(redirect_db[short_url], code=302) 
+    else:
+        return (abort(404))
 
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+    
 if __name__ == "__main__":
     app.run()
