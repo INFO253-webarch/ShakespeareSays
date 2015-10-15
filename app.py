@@ -75,7 +75,12 @@ def redirect_to_short(short_url):
     NOT FOUND
     """
     if redirect_db.get(short_url):
-        return redirect(redirect_db[short_url], code=302) 
+        if not redirect_db[short_url][:7] == 'http://':
+            redirect_url = 'http://' + redirect_db[short_url]
+        else:
+            redirect_url = redirect_db[short_url]
+
+        return redirect(redirect_url, code=302) 
     else:
         return (abort(404))
 
