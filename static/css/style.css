@@ -67,4 +67,28 @@ form {
 }
 
 
+/*Success Page*/
+
+#success_baby {
+	height: 40%;
+	width: 40%;
+	margin: 2%;
+}
+
+#success_box {
+	padding-top: 2.2%;
+	margin: 0 auto;
+	width: 40%;
+	height: 30%;
+	text-align: center;
+	border-style: solid;
+	border-color: #8A1337;
+}
+
+.url {
+	color: #B71B4A;
+}
+
+
+
 

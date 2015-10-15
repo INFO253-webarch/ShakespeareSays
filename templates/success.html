@@ -1,2 +1,21 @@
-{{ short_url }}
-{{ long_url }}
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<title>Shortened URL</title>
+		<link rel="stylesheet" href="static/css/style.css" type="text/css">
+	</head>
+	<body>
+	
+	<br><br>
+	<img src="http://a.abcnews.go.com/images/Health/HT_sam_griner_then_02_jef_150413_16x9_992.jpg" id="success_baby">
+	<div id="success_box"
+		<h3>Your URL <span class="url"> {{ long_url }} </span>
+		<br><br>has been shortened to </h3>
+		<h2><a style="text-decoration:none" href="/short/{{ short_url }}"><span class="url"> {{ short_url }}</a>  </span> </h2>
+	</div>
+
+	
+
+
+	</body>
+</html>
