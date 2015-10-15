@@ -17,6 +17,7 @@ app.debug = True
 
 # Database/Dictionary to save shortened URLs
 redirect_db = shelve.open("shorten.db")
+backwards_db = shelve.open("lengthen.db")
 
 @app.route('/')
 def index():
@@ -48,8 +49,11 @@ def create():
     if not short_url:
         short_url = ''.join(random.choice(string.ascii_uppercase) 
                            for _ in range(9))
-
-    redirect_db[short_url] = long_url
+    if long_url in backwards_db:
+        short_url = backwards_db[long_url]
+    else:
+        redirect_db[short_url] = long_url
+        backwards_db[long_url] = short_url
 
 
     return render_template("success.html", 
