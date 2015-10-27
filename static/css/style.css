@@ -19,19 +19,21 @@ label {
 	background-color: #8A1337;
 	color: #fff;
 	padding: 1.5% 1.5%;
-	width: 115px;
+	width: 30%;
 	border: 1px solid #8A1337;
 }
 
 input {
-	width: 300px;
+	width: 60%;
 	padding: 1.5% 1.5%;
 	font-size: 1em;
-	margin: 0;
+	margin: 0 auto;
+	float: left;
 }
 
 form {
 	margin: 0 auto;
+	width: 500px;
 }
 
 .blurb {
@@ -42,19 +44,21 @@ form {
 	font-size: 1.2em;
 }
 
-.url_align {
-	/*float: right;*/
-	/*clear: both;*/
-	display: inline-block;
-	margin-right: 30%;
-	/*margin-left: 300px;*/
-}
 
 .label_align {
 	float: left;
 	clear: both;
-	margin-left: 30%;
+	/*margin-left: 30%;*/
 }
+
+.url_align {
+	/*float: right;*/
+	clear: right;
+	/*display: inline-block;*/
+	/*margin-right: 30%;*/
+	/*margin-left: 300px;*/
+}
+
 
 #submit_button {
 	width: 200px;
@@ -63,7 +67,15 @@ form {
 	border-radius: 25px;
 	color: #fff;
 	font-size: 1em;
-	margin: 1.5%;
+	float: none;
+	display: block;
+	margin: 0 auto;
+}
+
+h6 {
+	display: block;
+	float: none;
+	clear: both;
 }
 
 
@@ -88,7 +100,4 @@ form {
 .url {
 	color: #B71B4A;
 }
-
-
-
 
