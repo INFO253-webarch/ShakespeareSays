@@ -14,16 +14,18 @@ $("#url_shortener").submit(function(){
 	}
 
 /* Checks short URL. If blank, generates one. If not a digit AND not an empty string, proceeds */
-	else {
-		if((isNaN(shortValue) === false) && (shortValue != "")) {
-			alert("Invalid input. You cannot enter in a digit!");
+	else{
+		var re = /^[A-Za-z]+$/;
+		
+		if((re.test(shortValue) === false) && (shortValue != "")) {
+			alert("Invalid input in Short URL! You should either enter letters or leave it blank to auto-generate a short URL.");
 			return false;
 		}
 		else {
 			short_url = shortValue;     
 		}
 	}
-
 	
 	return true;
 });
+	
