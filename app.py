@@ -11,6 +11,7 @@ import json
 import hashlib
 import random
 import string
+import csv
 
 app = flask.Flask(__name__)
 app.debug = True
@@ -18,6 +19,15 @@ app.debug = True
 # Database/Dictionary to save shortened URLs
 redirect_db = shelve.open("shorten.db")
 backwards_db = shelve.open("lengthen.db")
+
+with open('quotes.csv', newline='', encoding='latin-1') as f:
+    raw_quotes = list(csv.reader(f))
+
+quotes = []
+for rq in raw_quotes:
+    q = ''.join(x for x in rq[0] if x not in string.punctuation)
+    quotes.append('-'.join(q.split()))
+
 
 @app.route('/')
 def index():
@@ -47,8 +57,7 @@ def create():
     long_url = request.form.get("long_url")
     
     if not short_url:
-        short_url = ''.join(random.choice(string.ascii_uppercase) 
-                           for _ in range(9))
+        short_url = ''.join(random.choice(quotes))
     if long_url in backwards_db:
         short_url = backwards_db[long_url]
     else:
