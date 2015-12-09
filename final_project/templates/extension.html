@@ -21,13 +21,13 @@
 
 <img src="http://www.hamptons-shakespeare.org/sites/default/files/images/Logo-new%20colors.png" style="margin: 0 auto; display: block; max-width: 200px"/>
 
-<form id="url_shortener" method="POST" action="/shorten">
+<form id="url_shortener" method="POST" action="http://127.0.0.1:5000/create">
 	
 <p>
 	<label for="long_url" class="label_align">Your Current URL: </label>
 	<!-- FIX BELOW LATER -->
-	<!-- <input type="text" id="long_url" name="long_url" class="url_align"/> -->
-	<h4 id="url"></h4>
+	<input type="text" id="url" name="long_url" class="url_align"/>
+	<!-- <h4 id="url"></h4> -->
 
 </p>
 		<input id="submit_button" type="submit" value="Please Translate, Shakespeare"/>
