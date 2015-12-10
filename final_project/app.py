@@ -91,6 +91,10 @@ def redirect_to_short(short_url):
     else:
         return (abort(404))
 
+@app.route("/shorten/<short_url>", methods=['GET', 'POST'])
+def shorten(short_url):
+    return redirect_to_short(short_url)
+
 
 @app.errorhandler(404)
 def page_not_found(e):
