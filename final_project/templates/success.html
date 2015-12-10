@@ -2,16 +2,22 @@
 <html lang="en-us">
 	<head>
 		<title>Shortened URL</title>
-		<link rel="stylesheet" href="static/css/style.css" type="text/css">
+		<link rel="stylesheet" href="../static/css/extension.css" type="text/css"/>
 	</head>
 	<body>
 	
-	<br><br>
-	<img src="http://a.abcnews.go.com/images/Health/HT_sam_griner_then_02_jef_150413_16x9_992.jpg" id="success_baby">
+<h1>Shakespeare Says</h1>
+
+<img src="http://www.hamptons-shakespeare.org/sites/default/files/images/Logo-new%20colors.png" style="margin: 0 auto; display: block; margin-bottom: 20px; max-width: 200px"/>
+
 	<div id="success_box"
-		<h3>Your URL <span class="url"> {{ long_url }} </span>
-		<br><br>has been shortened to </h3>
-		<h2><a style="text-decoration:none" href="/short/{{ short_url }}"><span class="url"> {{ short_url }}</a>  </span> </h2>
+		<br><br>
+		Your URL 
+		<br><br>
+		<span class="url"> {{ long_url }} </span>
+		<br><br>has been shortened to
+		<br><br>
+		<a href="/shorten/{{ short_url }}"><span class="url"> {{ short_url }}</a>  </span> 
 	</div>
 
 	
