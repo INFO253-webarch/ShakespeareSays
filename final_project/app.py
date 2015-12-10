@@ -35,7 +35,6 @@ def index():
     Builds a template based on a GET request, with some default
     arguments
     """
-    print('hey whatsup hello')
 
     return flask.render_template('extension.html')
 
@@ -53,14 +52,8 @@ def create():
     This POST request creates an association between a short url and a full url
     and saves it in the database (the dictionary db)
     """
-    # if request.method == 'GET':
-    #     print(long_url, short_url)
-
     short_url = request.form.get("short_url")
     long_url = request.form.get("long_url")
-    
-    # if not long_url:
-    #     long_url = 'hello'
 
     if not short_url:
         short_url = ''.join(random.choice(quotes))
@@ -69,7 +62,6 @@ def create():
     else:
         redirect_db[short_url] = long_url
         backwards_db[long_url] = short_url
-
 
     return render_template("success.html", 
                            short_url=short_url, 
@@ -82,7 +74,7 @@ def test_create(create_url):
     return('Added short url {} to redirect to google'.format(create_url))
 
 
-@app.route("/shorten/<short_url>", methods=['GET', 'POST'])
+@app.route("/short/<short_url>", methods=['GET', 'POST'])
 def redirect_to_short(short_url):
     print('short in redirect', short_url)
     """
@@ -90,7 +82,7 @@ def redirect_to_short(short_url):
     NOT FOUND
     """
     if redirect_db.get(short_url):
-        if not redirect_db[short_url][:7] == 'http://':
+        if not (redirect_db[short_url][:7] == 'http://' or redirect_db[short_url][:8] == 'https://'):
             redirect_url = 'http://' + redirect_db[short_url]
         else:
             redirect_url = redirect_db[short_url]
@@ -99,22 +91,6 @@ def redirect_to_short(short_url):
     else:
         return (abort(404))
 
-# @app.route("/shorten/", methods=['GET', 'POST'])
-# def redirect_to_short2(short_url):
-#     print('short in redirect', short_url)
-#     """
-#     Redirect the request to the URL associated =short=, otherwise return 404
-#     NOT FOUND
-#     """
-#     if redirect_db.get(short_url):
-#         if not redirect_db[short_url][:7] == 'http://':
-#             redirect_url = 'http://' + redirect_db[short_url]
-#         else:
-#             redirect_url = redirect_db[short_url]
-
-#         return redirect(redirect_url, code=302) 
-#     else:
-#         return (abort(404))
 
 @app.errorhandler(404)
 def page_not_found(e):
