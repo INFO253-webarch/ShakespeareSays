@@ -15,29 +15,12 @@ h1 {
 #submit_button {
 	text-align: center;
 	margin: 0 auto;
-	display: block;body {
-	min-width: 30%;
-	width: 350px;
-	background-color: #FCD844;
-	color: #333;
-	text-align: center;
-}
-
-h1 {
-	font-family: "Book Antiqua", serif;
-	text-align: center;
-}
-
-
-#submit_button {
-	text-align: center;
-	margin: 0 auto;
 	display: block;
 }
 
 #success_box {
 	margin: 0 auto;
-	width: 40%;
+	width: 80%;
 	/*height: 30%;*/
 	text-align: center;
 	border-style: solid;
@@ -54,23 +37,3 @@ a {
 	text-decoration: none;
 }
 
-}
-
-#success_box {
-	margin: 0 auto;
-	width: 40%;
-	/*height: 30%;*/
-	text-align: center;
-	border-style: solid;
-	border-color: #8A1337;
-	padding: 10px;
-}
-
-a {
-	text-decoration: none;
-}
-
-.url {
-	color: #B71B4A;
-	text-decoration: none;
-}
