@@ -36,7 +36,7 @@ def index():
     arguments
     """
 
-    return flask.render_template('extension.html')
+    return flask.render_template('index.html')
 
 ###
 # Now we'd like to do this generally:
@@ -46,15 +46,16 @@ def index():
 # =short= word and a URL, then return a 404
 ###
 
-@app.route("/create", methods=['POST', 'GET'])
+@app.route("/create", methods=['POST'])
 def create():
     """
     This POST request creates an association between a short url and a full url
     and saves it in the database (the dictionary db)
     """
+    print('here')
     short_url = request.form.get("short_url")
     long_url = request.form.get("long_url")
-
+    
     if not short_url:
         short_url = ''.join(random.choice(quotes))
     if long_url in backwards_db:
@@ -62,6 +63,7 @@ def create():
     else:
         redirect_db[short_url] = long_url
         backwards_db[long_url] = short_url
+
 
     return render_template("success.html", 
                            short_url=short_url, 
@@ -74,7 +76,7 @@ def test_create(create_url):
     return('Added short url {} to redirect to google'.format(create_url))
 
 
-@app.route("/short/<short_url>", methods=['GET', 'POST'])
+@app.route("/short/<short_url>", methods=['GET'])
 def redirect_to_short(short_url):
     print('short in redirect', short_url)
     """
@@ -82,7 +84,7 @@ def redirect_to_short(short_url):
     NOT FOUND
     """
     if redirect_db.get(short_url):
-        if not (redirect_db[short_url][:7] == 'http://' or redirect_db[short_url][:8] == 'https://'):
+        if not redirect_db[short_url][:7] == 'http://':
             redirect_url = 'http://' + redirect_db[short_url]
         else:
             redirect_url = redirect_db[short_url]
@@ -90,10 +92,6 @@ def redirect_to_short(short_url):
         return redirect(redirect_url, code=302) 
     else:
         return (abort(404))
-
-@app.route("/shorten/<short_url>", methods=['GET', 'POST'])
-def shorten(short_url):
-    return redirect_to_short(short_url)
 
 
 @app.errorhandler(404)
